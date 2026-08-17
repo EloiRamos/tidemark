@@ -1,0 +1,60 @@
+"""Read-only presentation surfaces over immutable review projections."""
+
+from tidemark.ui.decision_review import render_decision_review_workspace
+from tidemark.ui.final_ui import (
+    COMMITTED_CLOUD_PROOF_SOURCE,
+    COMMITTED_HISTORICAL_LIVE_PROOF_DIGEST,
+    COMMITTED_HISTORICAL_LIVE_PROOF_SOURCE,
+    DESIGN_AUTHORITY,
+    CommittedCloudProof,
+    CommittedHistoricalLiveProof,
+    FinalUiScenario,
+    build_final_ui_scenarios,
+    render_final_ui,
+)
+from tidemark.ui.run_summary import (
+    ComparisonStatus,
+    DemoRunSummary,
+    EvidenceMode,
+    PublicationReviewStatus,
+    REQUIRED_SCENARIO_CONTRACTS,
+    REQUIRED_SCENARIO_ORDER,
+    RunStatus,
+    ScenarioEvidence,
+    ScenarioExpectation,
+    ScenarioId,
+    ScenarioIntegrityStatus,
+    ScenarioProvenance,
+    ScenarioSummary,
+    build_demo_run_summary,
+    render_demo_run_summary,
+)
+
+
+__all__ = (
+    "ComparisonStatus",
+    "COMMITTED_CLOUD_PROOF_SOURCE",
+    "COMMITTED_HISTORICAL_LIVE_PROOF_DIGEST",
+    "COMMITTED_HISTORICAL_LIVE_PROOF_SOURCE",
+    "DESIGN_AUTHORITY",
+    "CommittedCloudProof",
+    "CommittedHistoricalLiveProof",
+    "DemoRunSummary",
+    "EvidenceMode",
+    "FinalUiScenario",
+    "PublicationReviewStatus",
+    "REQUIRED_SCENARIO_CONTRACTS",
+    "REQUIRED_SCENARIO_ORDER",
+    "RunStatus",
+    "ScenarioEvidence",
+    "ScenarioExpectation",
+    "ScenarioId",
+    "ScenarioIntegrityStatus",
+    "ScenarioProvenance",
+    "ScenarioSummary",
+    "build_demo_run_summary",
+    "build_final_ui_scenarios",
+    "render_decision_review_workspace",
+    "render_demo_run_summary",
+    "render_final_ui",
+)

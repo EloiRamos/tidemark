@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tidemark"
+version = "0.1.0"
+description = "Deterministic runtime authorization vocabulary for TIDEMARK"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "google-adk==1.18.0",
+    "google-genai==1.47.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers --strict-config"
+pythonpath = ["src"]
+testpaths = ["tests"]
