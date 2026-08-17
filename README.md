@@ -1,8 +1,17 @@
 # TIDEMARK
 
+TIDEMARK is a deterministic authorization boundary for autonomous-agent tool
+calls: a model may choose from trusted references, but it cannot supply a
+protected value to a side-effecting tool.
+
+![TIDEMARK's read-only inspector shows a benign selection receiving trusted runtime binding and ALLOW in the current offline demo.](docs/assets/readme/tidemark-overview.png)
+
 > **Selection, not supply.** Untrusted content may select among values the
 > runtime already trusts. It may never supply a protected value to a
 > side-effecting tool.
+
+[Watch the final product walkthrough (3:55)](https://youtu.be/lcHhdxcZM4U)
+· [View the architecture and execution-provenance diagram (PDF)](docs/architecture/TIDEMARK_ARCHITECTURE_SUBMISSION_DIAGRAM_v1.0.pdf)
 
 TIDEMARK is a deterministic runtime boundary between model-authored tool
 arguments and a trusted execution adapter. A model can propose an opaque
@@ -12,14 +21,47 @@ single-use prepared authority only after `ALLOW`, vetoes invalid or replayed
 calls before side effects, and emits masked evidence that keeps policy,
 decision, execution, and observed effects distinct.
 
-## Current status
+## What TIDEMARK demonstrates
+
+- **Protected authority stays in the runtime.** A proposal can carry an opaque
+  selection; trusted runtime state alone resolves and binds the protected role.
+- **An ALLOW is not an effect.** Only an immutable-policy `ALLOW` can create a
+  sealed, single-use prepared call, which is revalidated again at execution.
+- **Refusals have measurable absence of effects.** Raw protected-value supply
+  is denied before preparation, with explicit zero-start and zero-payment
+  evidence.
+- **Evidence is safe to review.** The read-only UI keeps proposal, decision,
+  execution, replay, and synthetic effect records separate while exposing only
+  masked, allowlisted projections.
+
+## Product walkthrough
+
+The approved walkthrough shows the integrated read-only UI across a benign
+selection and effect, raw-supply denial with zero effects, replay rejection,
+safe evidence trace, and the provenance-separated architecture. The current
+demo is deterministic and offline; historical live-model and cloud proofs are
+clearly labelled as historical rather than current execution.
+
+![A raw protected-value supply is denied before preparation, with execution not started and zero synthetic payments.](docs/assets/readme/tidemark-deny-zero-effect.png)
+
+Raw protected-value supply is denied before a prepared call exists; execution
+is `NOT_STARTED`, with zero adapter starts and zero synthetic payments.
+
+![A completed call is rejected on replay, while total adapter starts and synthetic payments remain one.](docs/assets/readme/tidemark-evidence-replay.png)
+
+A completed call is rejected on replay, while total adapter starts and
+synthetic payments remain one; the local guarantee is at-most-once adapter
+entry, not external or distributed exactly-once.
+
+## Hackathon implementation and release status
 
 The bounded product is implemented. It includes the framework-neutral runtime,
 Google ADK callback adapter, synthetic payment vertical slice, append-only
 evidence and publication pipeline, 35-scenario adversarial security matrix,
 deterministic six-scenario demo, and integrated read-only Security Decision
 Trace UI. The fresh full release suite passes all 1,107 tests under the
-documented validation environment.
+documented validation environment: `FULL_PYTEST=1107/1107` and
+`MAKE_VERIFY=111/111`.
 
 The provenance boundaries are deliberately explicit:
 
@@ -38,8 +80,9 @@ Video evidence is complete and the submission package is prepared.
 TIDEMARK is a hackathon-quality security mechanism and evidence product, not a
 production-ready payment or general agent-authorization system.
 
-This validated release contains 120 files, including a proprietary
-evaluation-only licence. The project licence decision is resolved.
+This validated release baseline contains 120 files, including its proprietary
+evaluation-only licence. The three README presentation assets are a later,
+presentation-only addition to that validated baseline.
 
 ## Third-party dependency notices
 
@@ -83,7 +126,7 @@ existing masked review projection. It receives no raw protected value, opaque
 reference value, runtime-private payload, or private binding/authenticator
 material.
 
-## Strongest proven properties
+## Security properties and evidence
 
 - **Untrusted selection cannot mint trusted supply.** Protected arguments must
   be exact runtime reference objects backed by the trusted store; raw or forged
@@ -105,7 +148,7 @@ The complete claim-to-code/test/evidence/UI map and the 35-scenario threat
 summary are in the
 [Security Invariant Traceability and Threat Model](docs/security/TIDEMARK_SECURITY_INVARIANT_TRACEABILITY_AND_THREAT_MODEL_v1.0.md).
 
-## Explicit non-claims
+## Limitations
 
 TIDEMARK does not claim to prevent prompt injection, make Gemini secure, or
 guarantee future model behavior. It is not identity/RBAC, delegation, approval
@@ -198,6 +241,13 @@ unchanged clean `HEAD` immediately before manifest construction. Capture and
 fallback perform exactly three fresh runs and compare a closed typed semantic
 snapshot; there is no fourth or replacement run.
 
+## Architecture
+
+The [architecture and execution-provenance diagram](docs/architecture/TIDEMARK_ARCHITECTURE_SUBMISSION_DIAGRAM_v1.0.pdf)
+keeps current offline evidence, historical Gemini/ADK proof, and historical
+provider-free Cloud Run proof visibly separate. It makes explicit that there
+is no Gemini/API/ADK-to-Cloud-Run path and no current deployment claim.
+
 ## Repository map
 
 ```text
@@ -224,3 +274,8 @@ Release provenance: all canonical product bytes originate from source revision
 `e18e068d13e027b0dbdd5bcb2bc51c5c7123be6a`; the judge-facing runbook and
 release metadata are derived publication artifacts. Current offline evidence
 remains distinct from the included historical live-model and cloud proofs.
+
+## Licence
+
+TIDEMARK is provided under a proprietary evaluation-only licence. The licence
+holder is Elói Ramos; see [LICENSE](LICENSE).
