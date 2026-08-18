@@ -10,7 +10,7 @@ protected value to a side-effecting tool.
 > runtime already trusts. It may never supply a protected value to a
 > side-effecting tool.
 
-[Watch the final product walkthrough (3:55)](https://youtu.be/lcHhdxcZM4U)
+[Watch the final product walkthrough (3:55)](https://youtu.be/lLDKBSCcMPo)
 · [View the architecture and execution-provenance diagram (PDF)](docs/architecture/TIDEMARK_ARCHITECTURE_SUBMISSION_DIAGRAM_v1.0.pdf)
 
 TIDEMARK is a deterministic runtime boundary between model-authored tool
